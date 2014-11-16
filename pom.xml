@@ -19,6 +19,11 @@
     	<artifactId>antisamy</artifactId>
     	<version>1.5.3</version>
     </dependency>
+    <dependency>
+    	<groupId>org.apache.logging.log4j</groupId>
+    	<artifactId>log4j-core</artifactId>
+    	<version>2.1</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -26,9 +31,9 @@
         <artifactId>maven-assembly-plugin</artifactId>
         <version>2.5.1</version>
         <configuration>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
+          <descriptors>
+            <descriptor>maven-assembly.xml</descriptor>
+          </descriptors>
           <archive>
             <manifest>
               <mainClass>org.sleepytonic.antisamy.App</mainClass>
@@ -45,7 +50,32 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.2.1</version>
+        <configuration>
+          <mainClass>org.sleepytonic.antisamy.App</mainClass>
+        </configuration>
+      </plugin>
     </plugins>
+    <!--filters>
+      <filter>src/main/filters/filter.properties</filter>
+    </filters-->
+    <resources>
+      <resource>
+        <directory>src/main/resources/</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
   </build>
+
+  <properties>
+    <!--
+      the default antisamy config
+      to use when none is specified
+    -->
+    <filter.antisamyfile.default>config.xml</filter.antisamyfile.default>
+  </properties>
 
 </project>

@@ -1,13 +1,16 @@
 package org.sleepytonic.antisamy;
 
+import org.owasp.validator.html.*;
+
 /**
  * Hello world!
  *
  */
-public class App 
+public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        AntiSamy as = new AntiSamy();
+        System.out.println( "Hello World! " + as.toString() );
     }
 }
